@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
-
-const ProductModel = new mongoose.Schema({
+const Product = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please Enter Product Name"],
+    required: [true, "A Product must have Name"],
     trim: true,
   },
   price: {
     type: Number,
-    required: [true, "Please Enter Product Price"],
-    maxlength: [10, "Price cannot exceed 10 character"],
+    required: [true, "A Product must have price"],
+    maxlength: [8, "price cannot exceed 8 character"],
   },
-  Ratting: {
+  rating: {
     type: Number,
     default: 0,
   },
-  NoOfRattingReviews: {
+  noOfRatingReviews: {
     type: Number,
     default: 0,
   },
@@ -78,7 +77,7 @@ const ProductModel = new mongoose.Schema({
     required: true,
   },
   brandWarranty: {
-    type: String,
+    type: Number,
     required: true,
   },
   deliveryCharges: {
@@ -87,4 +86,4 @@ const ProductModel = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.Schema("Product", ProductModel);
+module.exports = mongoose.model("Product", Product);
