@@ -8,6 +8,7 @@ const {
 } = require("../Controller/ProductController");
 const router = express.Router();
 
+
 router.route("/products").get(getAllProducts);
 router.route("/newProduct").post(createProduct);
 router
