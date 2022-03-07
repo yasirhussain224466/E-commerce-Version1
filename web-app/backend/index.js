@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require("morgan");
 const product = require('./Routes/ProductRoute')
+const UserAuthentication = require('./Routes/UserRoute')
 const GlobalErrorHandler = require('./Controller/ErrorController')
 
 
@@ -13,6 +14,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1', product)
+app.use('/api/v1',UserAuthentication)
 
 app.all("*", (req, res, next) => {
   // console.log("Wrong Url")
