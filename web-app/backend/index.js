@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cookieParcer = require('cookie-parser')
 const morgan = require("morgan");
 const product = require('./Routes/ProductRoute')
 const UserAuthentication = require('./Routes/AuthenticationRoute')
@@ -8,6 +9,7 @@ const AppError = require('./Utils/ErrorHandler')
 
 
 app.use(express.json());
+app.use(cookieParcer())
 app.use(morgan("dev"));
 app.use((req, res, next) => {
   console.log("Hello from the Middleware");

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import Product from "./Product";
+import Product from "./ProductCard";
 import ImgNo1 from "../Assets/MobilePhones/iphone-12.png";
 
 const productApi = {
@@ -37,7 +37,7 @@ const FeaturedProduct = () => {
   const classes = useStyles();
   return (
     <>
-      <Box sx={{ backgroundColor: "#f4f4f4", height: "100vh" }}>
+      <Box sx={{ backgroundColor: "#f4f4f4" }}>
         <Box
           sx={{
             display: "flex",
@@ -70,8 +70,17 @@ const FeaturedProduct = () => {
           >
             <Grid
               container
-              sx={{ display: "flex", justifyContent: "space-between" }}
+              sx={{ display: "flex", justifyContent: "space-around" }}
             >
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
+              <Product product={productApi} />
               <Product product={productApi} />
             </Grid>
           </Grid>

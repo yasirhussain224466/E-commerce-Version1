@@ -20,10 +20,12 @@ const Product = ({ product }) => {
         md={1.9}
         sm={3}
         xs={5.65}
-        // classname={classes.ProductContainer}
         sx={{
+          marginLeft: { lg: "10px", md: "10px", sm: "0px", xs: "0px" },
+          marginRight: { lg: "10px", md: "10px", sm: "0px", xs: "0px" },
+          marginTop: { lga: "25px", md: "25px", sm: "7px", xs: "7px" },
+          marginBottom: { lg: "25px", md: "25px", sm: "7px", xs: "7px" },
           backgroundColor: "white",
-          marginBottom: "20px",
           padding: "10px",
           borderRadius: "7px",
           transition: "all 0.2s",

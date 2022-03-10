@@ -1,8 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Box, Typography, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Height } from "@mui/icons-material";
-import { fontWeight } from "@mui/system";
 import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import VerifiedUserRoundedIcon from "@mui/icons-material/VerifiedUserRounded";

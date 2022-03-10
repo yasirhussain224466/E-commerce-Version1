@@ -1,7 +1,6 @@
 const User = require("../Model/UserModel");
 const CatchAsync = require("../Utils/CatchAsync");
 const AppError = require("../Utils/ErrorHandler");
-// const sendToken = require("../Utils/JwtToken");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
@@ -10,6 +9,30 @@ const sendEmail = require("../Utils/email");
 const JWTToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
+
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("token", token, cookieOptions);
+
+  // Remove password from output
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
   });
 };
 
@@ -25,13 +48,14 @@ exports.userSignUp = CatchAsync(async (req, res, next) => {
 
   //   sendToken(newUser, 201, res, "signup");
 
-  const token = JWTToken(newUser._id);
+  //   const token = JWTToken(newUser._id);
 
-  res.status(200).json({
-    status: "success",
-    token: token,
-    data: newUser,
-  });
+  //   res.status(200).json({
+  //     status: "success",
+  //     token: token,
+  //     data: newUser,
+  //   });
+  createSendToken(newUser, 200, res);
 });
 
 exports.login = CatchAsync(async (req, res, next) => {
@@ -52,14 +76,16 @@ exports.login = CatchAsync(async (req, res, next) => {
   }
 
   // 3) is everything ok? then send token to the client
+
   //   sendToken(user, 200, res, "login");
 
-  const token = JWTToken(user._id);
+  //   const token = JWTToken(user._id);
 
-  res.status(200).json({
-    status: "success",
-    token: token,
-  });
+  //   res.status(200).json({
+  //     status: "success",
+  //     token: token,
+  //   });
+  createSendToken(user, 200, res);
 });
 
 exports.protect = CatchAsync(async (req, res, next) => {
@@ -71,6 +97,8 @@ exports.protect = CatchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
+
+  // const { token } = req.cookies;
 
   if (!token) {
     return next(
@@ -185,12 +213,13 @@ exports.resetPassword = CatchAsync(async (req, res, next) => {
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
 
-  const token = JWTToken(user._id);
+  //   const token = JWTToken(user._id);
 
-  res.status(200).json({
-    status: "success",
-    token: token,
-  });
+  //   res.status(200).json({
+  //     status: "success",
+  //     token: token,
+  //   });
+  createSendToken(user, 200, res);
 });
 
 exports.updatePassword = CatchAsync(async (req, res, next) => {
@@ -206,15 +235,30 @@ exports.updatePassword = CatchAsync(async (req, res, next) => {
   }
 
   // 3) if so, then update the password
-  user.password = req.body.password,
+  user.password = req.body.password;
   user.confirmPassword = req.body.confirmPassword;
   await user.save();
 
   // 4) log the user in.. send JWT
-  const token = JWTToken(user._id);
+  //   const token = JWTToken(user._id);
+
+  //   res.status(200).json({
+  //     status: "success",
+  //     token: token,
+  //   });
+  createSendToken(user, 200, res);
+});
+
+exports.logout = CatchAsync(async (req, res, next) => {
+  const cookieOptions = {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  };
+
+  res.cookie("token", null, cookieOptions);
 
   res.status(200).json({
     status: "success",
-    token: token,
+    message: "Logout successFully",
   });
 });

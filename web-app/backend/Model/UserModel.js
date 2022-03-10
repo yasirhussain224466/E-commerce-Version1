@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto')
+const crypto = require("crypto");
 const UserModel = mongoose.Schema({
   name: {
     type: String,
@@ -47,15 +47,19 @@ const UserModel = mongoose.Schema({
       required: true,
     },
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   role: {
     type: String,
     enum: ["user", "guide", "lead-guide", "admin"],
     default: "user",
   },
   passwordChangedAt: Date,
-  passwordResetToken:String,
+  passwordResetToken: String,
   passwordResetExpires: Date,
-
 });
 
 UserModel.pre("save", async function (next) {
@@ -70,8 +74,8 @@ UserModel.pre("save", async function (next) {
   next();
 });
 
-UserModel.pre('save', function(next) {
-  if (!this.isModified('password') || this.isNew) return next();
+UserModel.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();

@@ -11,7 +11,6 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SwipeableTemporaryDrawer from "./AppDrawer";
-import Logo from '../Assets/PNG Image/Logo.png'
 
 const pages = ["Home", "Product", "Contact", "About"];
 
@@ -100,7 +99,8 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: "flex", sm: "flex" } }}
           >
-            Technofony          </Typography>
+            Technofony{" "}
+          </Typography>
           <Box sx={{ ml: 5, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
