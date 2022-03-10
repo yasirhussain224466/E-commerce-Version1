@@ -2,6 +2,7 @@ const User = require("../Model/UserModel");
 const CatchAsync = require("../Utils/CatchAsync");
 const AppError = require("../Utils/ErrorHandler");
 // const sendToken = require("../Utils/JwtToken");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const sendEmail = require("../Utils/email");
@@ -149,10 +150,12 @@ exports.forgotPassword = CatchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-
+    console.log(err);
     return next(
-      new AppError("There was an error sending the email. Try again later!"),
-      500
+      new AppError(
+        "There was an error sending the email. Try again later!",
+        500
+      )
     );
   }
 });
@@ -182,6 +185,32 @@ exports.resetPassword = CatchAsync(async (req, res, next) => {
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
 
+  const token = JWTToken(user._id);
+
+  res.status(200).json({
+    status: "success",
+    token: token,
+  });
+});
+
+exports.updatePassword = CatchAsync(async (req, res, next) => {
+  // 1) get user from the collection
+  const user = await User.findById(req.user._id).select("+password");
+  if (!user) {
+    return next(new AppError("Please login again!"), 401);
+  }
+
+  // 2) check if posted current password is currect
+  if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
+    next(new AppError("Your current password is wrong.", 401));
+  }
+
+  // 3) if so, then update the password
+  user.password = req.body.password,
+  user.confirmPassword = req.body.confirmPassword;
+  await user.save();
+
+  // 4) log the user in.. send JWT
   const token = JWTToken(user._id);
 
   res.status(200).json({
