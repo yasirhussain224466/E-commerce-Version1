@@ -9,7 +9,7 @@ const {
 } = require("../Controller/ProductController");
 const router = express.Router();
 
-router.route("/products").get(protect, getAllProducts);
+router.route("/products").get( getAllProducts);
 router
   .route("/newProduct")
   .post(protect, restrictTo("admin", "lead-guide"), createProduct);

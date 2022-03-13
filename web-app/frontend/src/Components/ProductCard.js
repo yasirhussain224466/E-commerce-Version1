@@ -1,19 +1,17 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import product1 from "../Assets/MobilePhones/iphone-12.png";
 import ReactStar from "react-rating-stars-component";
 import "../Style/LineClamp.css";
 
-const options = {
-  edit: false,
-  color: "rgba(20,20,20,0.1)",
-  activeColor: "tomato",
-  value: 2.5,
-  isHalf: true,
-};
-
 const Product = ({ product }) => {
+  console.log(product);
+  const options = {
+    edit: false,
+    color: "rgba(20,20,20,0.1)",
+    activeColor: "tomato",
+    value: product.rating,
+    isHalf: true,
+  };
   return (
     <>
       <Grid
@@ -34,9 +32,16 @@ const Product = ({ product }) => {
           },
         }}
       >
-        <Box sx={{ paddingLeft: "5px", paddingRight: "5px" }}>
+        <Box
+          sx={{
+            paddingTop: "5px",
+            paddingBottom: "10px",
+            paddingLeft: "5px",
+            paddingRight: "5px",
+          }}
+        >
           <Box>
-            <img style={{ width: "100%" }} src={product.imgs[0].url} alt="" />
+            <img style={{ width: "100%" }} src={product.image[0].url} alt="" />
           </Box>
         </Box>
         <Box>
@@ -65,7 +70,11 @@ const Product = ({ product }) => {
               fontFamily: "Roboto",
             }}
           >
-            {product.isInstallment}
+            {/* {product.isInstallment}
+             */}
+            {product.isInstallment
+              ? "Installment Available"
+              : "Installment not Available"}
           </Box>
           <Box
             sx={{
@@ -76,7 +85,7 @@ const Product = ({ product }) => {
           >
             <Box sx={{ display: "flex", color: "#9e9e9e", fontSize: "13px" }}>
               <ReactStar {...options} />
-              <span>(256)</span>
+              <span>({product.noOfRatingReviews})</span>
             </Box>
             <Box
               sx={{
@@ -86,7 +95,7 @@ const Product = ({ product }) => {
                 fontFamily: "Roboto",
               }}
             >
-              Pakistan
+              {product.country}
             </Box>
           </Box>
         </Box>

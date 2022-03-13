@@ -3,4 +3,6 @@
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
+    line-height: 1.2em;
+    height: 2.5em;     
 }

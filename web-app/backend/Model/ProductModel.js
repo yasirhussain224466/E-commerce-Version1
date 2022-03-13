@@ -77,7 +77,7 @@ const Product = new mongoose.Schema({
     required: true,
   },
   brandWarranty: {
-    type: Number,
+    type: String,
     required: true,
   },
   deliveryCharges: {

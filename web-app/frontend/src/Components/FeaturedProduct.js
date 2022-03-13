@@ -1,21 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Grid, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Product from "./ProductCard";
-import ImgNo1 from "../Assets/MobilePhones/iphone-12.png";
-
-const productApi = {
-  name: "Apple iPhone 13 Pro Max 128GB (Official Warranty Mercantile) (Both Sim PTA Approved) (Non Active)",
-  price: "230,000",
-  _id: "01",
-  imgs: [{ url: ImgNo1 }],
-  location: "Pakistan",
-  isInstallment: "Installment Available",
-};
-
+import { getProduct } from "../Redux/Actions/ProductAction";
+import { useDispatch, useSelector } from "react-redux";
 const useStyles = makeStyles({
   FeaturedProduct: {
-    paddingTop: "30px",
+    paddingTop: "20px",
     paddingBottom: "30px",
     display: "flex",
     alignItems: "center",
@@ -34,6 +25,13 @@ const useStyles = makeStyles({
 });
 
 const FeaturedProduct = () => {
+  const dispatch = useDispatch();
+  const { loading, products } = useSelector((state) => state.products);
+  const limit = 10;
+  useEffect(() => {
+    dispatch(getProduct(limit));
+  }, [dispatch]);
+
   const classes = useStyles();
   return (
     <>
@@ -50,7 +48,7 @@ const FeaturedProduct = () => {
             <Grid className={classes.FeaturedProduct}>
               <Typography
                 sx={{
-                  width: { lg: "20vw", md: "20vw", xs: "50vw", sm: "50vw" },
+                  fontSize: { md: "26px", xs: "25px" },
                 }}
                 className={classes.ProductHead}
                 variant="h5"
@@ -72,16 +70,8 @@ const FeaturedProduct = () => {
               container
               sx={{ display: "flex", justifyContent: "space-around" }}
             >
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
-              <Product product={productApi} />
+              {products &&
+                products.map((currElem) => <Product product={currElem} />)}
             </Grid>
           </Grid>
         </Container>

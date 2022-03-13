@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mui/lab": "^5.0.0-alpha.72",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.6",
@@ -21,6 +22,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
+    "react-swipeable-views": "^0.14.0",
     "validator": "^13.7.0"
   }
 }

@@ -49,8 +49,8 @@ const UserModel = mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true,
+    ref: "user",
+    // required: true,
   },
   role: {
     type: String,
