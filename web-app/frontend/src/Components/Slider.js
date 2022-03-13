@@ -46,31 +46,31 @@ const CarouselSlider = () => {
   const classes = useStyles();
   return (
     <>
-      
+      <Box >
+        <Carousel style={{}} fade={true} pause={false}>
+          <Carousel.Item  interval={3000}>
+            <img className="d-block w-100" src={img1} alt="First slide" />
 
-      <Carousel fade={true} pause={false}>
-        <Carousel.Item interval={3000}>
-          <img className="d-block w-100" src={img1} alt="First slide" />
+            <Carousel.Caption></Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={3000}>
+            <img className="d-block w-100" src={img2} alt="First slide" />
 
-          <Carousel.Caption></Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={3000}>
-          <img className="d-block w-100" src={img2} alt="First slide" />
+            <Carousel.Caption></Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={3000}>
+            <img className="d-block w-100" src={img3} alt="First slide" />
 
-          <Carousel.Caption></Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={3000}>
-          <img className="d-block w-100" src={img3} alt="First slide" />
+            <Carousel.Caption></Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={3000}>
+            <img className="d-block w-100" src={img4} alt="First slide" />
 
-          <Carousel.Caption></Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={3000}>
-          <img className="d-block w-100" src={img4} alt="First slide" />
-
-          <Carousel.Caption></Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-      <Box sx={{display:{md:'none', lg:'none', sm:'flex',xs:'flex'}}}>
+            <Carousel.Caption></Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </Box>
+      <Box sx={{ display: { md: "none", lg: "none", sm: "none", xs: "none" } }}>
         <Grid pt={8} className={classes.banner}>
           <Typography className={classes.H6} variant="h6">
             Welcome to QuickMart

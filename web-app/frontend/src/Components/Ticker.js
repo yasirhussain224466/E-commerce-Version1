@@ -18,13 +18,12 @@ const useStyles = makeStyles({
     height: "50px",
     borderTop: "3px solid #f4f4f4",
     borderBottom: "3px solid #f4f4f4",
-    marginTop:'13px',
-    marginBottom:'13px',
-    boxShadow:'none'
-    
+    marginTop: "13px",
+    marginBottom: "13px",
+    boxShadow: "none",
   },
   Typography: {
-    paddingLeft:'9px'
+    paddingLeft: "9px",
   },
   Box: {
     display: "flex",
@@ -36,25 +35,29 @@ const Ticker = () => {
 
   return (
     <>
-    <Container maxWidth="xl">
-      <AppBar className={classes.AppBar} position="static">
-        <Toolbar className={classes.Toolbar}>
-          <Box className={classes.Box}>
-            <LocalShippingRoundedIcon />
-            <Typography className={classes.Typography}>
-              Super Fast Delivery
-            </Typography>
-          </Box>
-          <Box className={classes.Box}>
-            <CachedRoundedIcon />
-            <Typography className={classes.Typography}>15 days Return</Typography>
-          </Box>
-          <Box className={classes.Box}>
-            <VerifiedUserRoundedIcon />
-            <Typography className={classes.Typography}>1 Year Warrenty</Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Container sx={{ display: { xs: "none", md: "flex" } }} maxWidth="xl">
+        <AppBar className={classes.AppBar} position="static">
+          <Toolbar className={classes.Toolbar}>
+            <Box className={classes.Box}>
+              <LocalShippingRoundedIcon />
+              <Typography className={classes.Typography}>
+                Super Fast Delivery
+              </Typography>
+            </Box>
+            <Box className={classes.Box}>
+              <CachedRoundedIcon />
+              <Typography className={classes.Typography}>
+                15 days Return
+              </Typography>
+            </Box>
+            <Box className={classes.Box}>
+              <VerifiedUserRoundedIcon />
+              <Typography className={classes.Typography}>
+                1 Year Warrenty
+              </Typography>
+            </Box>
+          </Toolbar>
+        </AppBar>
       </Container>
     </>
   );
