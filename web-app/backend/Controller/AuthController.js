@@ -4,7 +4,9 @@ const AppError = require("../Utils/ErrorHandler");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const sendEmail = require("../Utils/email");
+const sendEmail = require("../Utils/Email");
+const cloudinary = require("cloudinary");
+
 
 const JWTToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -37,12 +39,20 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.userSignUp = CatchAsync(async (req, res, next) => {
+  // const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   folder: "avatar",
+  //   width: 150,
+  //   crop: "scale",
+  // });
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
-    avatar: req.body.avatar,
+    avatar: {
+      // public_id: mycloud.public_id,
+      // url: mycloud.secure_url,
+    },
     role: req.body.role,
     user: req.body.user,
   });

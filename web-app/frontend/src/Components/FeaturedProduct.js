@@ -4,7 +4,6 @@ import { makeStyles } from "@mui/styles";
 import Product from "./ProductCard";
 import { getProduct } from "../Redux/Actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import Loader from "./Loader";
 const useStyles = makeStyles({
   FeaturedProduct: {

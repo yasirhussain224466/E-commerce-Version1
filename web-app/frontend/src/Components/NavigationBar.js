@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "@mui/material";
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -54,61 +53,61 @@ const useStyles = makeStyles({
 
 const NavigationBar = () => {
   const [anchorE1, setAnchorE1] = React.useState(null);
-  const [anchorE2, setAnchorE2] = React.useState(null);
-  const [anchorE3, setAnchorE3] = React.useState(null);
-  const [anchorE4, setAnchorE4] = React.useState(null);
+  // const [anchorE2, setAnchorE2] = React.useState(null);
+  // const [anchorE3, setAnchorE3] = React.useState(null);
+  // const [anchorE4, setAnchorE4] = React.useState(null);
   const open1 = Boolean(anchorE1);
-  const open2 = Boolean(anchorE2);
-  const open3 = Boolean(anchorE3);
-  const open4 = Boolean(anchorE4);
+  // const open2 = Boolean(anchorE2);
+  // const open3 = Boolean(anchorE3);
+  // const open4 = Boolean(anchorE4);
 
   const handleClick1 = (event) => {
     setAnchorE1(event.currentTarget);
   };
 
-  const handleClick2 = (event) => {
-    setAnchorE2(event.currentTarget);
-  };
+  // const handleClick2 = (event) => {
+  //   setAnchorE2(event.currentTarget);
+  // };
 
-  const handleClick3 = (event) => {
-    setAnchorE3(event.currentTarget);
-  };
+  // const handleClick3 = (event) => {
+  //   setAnchorE3(event.currentTarget);
+  // };
 
-  const handleClick4 = (event) => {
-    setAnchorE4(event.currentTarget);
-  };
+  // const handleClick4 = (event) => {
+  //   setAnchorE4(event.currentTarget);
+  // };
 
   const handleClose1 = () => {
     setAnchorE1(null);
   };
 
-  const handleClose2 = () => {
-    setAnchorE2(null);
-  };
+  // const handleClose2 = () => {
+  //   setAnchorE2(null);
+  // };
 
-  const handleClose3 = () => {
-    setAnchorE3(null);
-  };
+  // const handleClose3 = () => {
+  //   setAnchorE3(null);
+  // };
 
-  const handleClose4 = () => {
-    setAnchorE4(null);
-  };
+  // const handleClose4 = () => {
+  //   setAnchorE4(null);
+  // };
 
   const handleOut1 = () => {
     setAnchorE1(null);
   };
 
-  const handleOut2 = () => {
-    setAnchorE2(null);
-  };
+  // const handleOut2 = () => {
+  //   setAnchorE2(null);
+  // };
 
-  const handleOut3 = () => {
-    setAnchorE3(null);
-  };
+  // const handleOut3 = () => {
+  //   setAnchorE3(null);
+  // };
 
-  const handleOut4 = () => {
-    setAnchorE4(null);
-  };
+  // const handleOut4 = () => {
+  //   setAnchorE4(null);
+  // };
   // const handleMouseOut = () => {
   //   setAnchorEl(null);
   // };

@@ -10,15 +10,14 @@ import {
   AppBar,
   MenuItem,
   Menu,
-  Button,
 } from "@mui/material";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SwipeableTemporaryDrawer from "./AppDrawer";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link, NavLink } from "react-router-dom";
-import LoginSignup from "./registerUser";
+import { Link } from "react-router-dom";
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

@@ -15,6 +15,7 @@ export const getProduct = (limit) => async (dispatch) => {
     dispatch({ type: ALL_PRODUCT_REQUEST });
 
     const { data } = await axios.get(
+      // `/api/v1/products?${limit}`
       `${serverSettings.server_base_url}/api/v1/products?limit=${limit}`
     );
     dispatch({
@@ -28,7 +29,6 @@ export const getProduct = (limit) => async (dispatch) => {
     });
   }
 };
-
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {

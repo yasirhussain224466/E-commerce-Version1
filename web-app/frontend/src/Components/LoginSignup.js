@@ -1,15 +1,12 @@
-import * as React from "react";
-import { Modal } from "react-bootstrap";
-import { IconButton, Tabs, Tab, Typography, Box } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import React, { useEffect } from "react";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import Signup from "./Signup";
 import Login from "./Login";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LinearIndeterminate from "./Loader";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,12 +41,14 @@ function a11yProps(index) {
   };
 }
 
-const LoginSignup = () => {
-  const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+const LoginSignup = ({ history }) => {
+  const { loading, isAuthenticated } = useSelector((state) => state.user);
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      history.push("/");
+    }
+  }, [isAuthenticated, history]);
 
-  const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const [value, setValue] = React.useState(0);
 

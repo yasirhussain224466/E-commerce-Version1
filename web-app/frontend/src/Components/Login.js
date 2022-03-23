@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
-import MenuItem from "@mui/material/MenuItem";
+
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Avatar, Link } from "@mui/material";
-// import {Link} from 'react-router-dom'
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { clearError, login } from "../Redux/Actions/UserAction";
+import { useDispatch } from "react-redux";
+import { login } from "../Redux/Actions/UserAction";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import SmsFailedRoundedIcon from "@mui/icons-material/SmsFailedRounded";
-import Loader from "./Loader";
 
 const useStyle = makeStyles({
   heading: {
@@ -75,8 +73,7 @@ const initialValue = {
 const Login = () => {
   const dispatch = useDispatch();
   const [loginUser, setLoginUser] = useState(initialValue);
-  const [check, setCheck] = useState();
-  const { user, loading, isAuthenticated } = useDispatch((state) => state.user);
+  const { isAuthenticated } = useDispatch((state) => state.user);
   const OnChangeUser = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
@@ -85,7 +82,6 @@ const Login = () => {
   const { email, password } = loginUser;
 
   const addData = (e) => {
-    setCheck(true);
     if (email && password) {
       e.preventDefault();
       dispatch(login(email, password));
@@ -96,7 +92,6 @@ const Login = () => {
       });
     } else {
       console.log("Provide valid");
-      setCheck(false);
     }
   };
 

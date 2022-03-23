@@ -4,7 +4,7 @@ import img1 from "../Assets/CarouselPicture/img1.jpg";
 import img2 from "../Assets/CarouselPicture/img2.jpg";
 import img3 from "../Assets/CarouselPicture/img3.jpg";
 import img4 from "../Assets/CarouselPicture/img4.jpg";
-import { Grid, Typography, Box, Button, Divider } from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 import { makeStyles } from "@mui/styles";
 // import Product from "../Components/Product";

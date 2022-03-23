@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
-import MenuItem from "@mui/material/MenuItem";
+
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Avatar, Link } from "@mui/material";
-import LinearIndeterminate from "./Loader";
-// import {Link} from 'react-router-dom'
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { signUp, clearError } from "../Redux/Actions/UserAction";
+import { useDispatch } from "react-redux";
+import { signUp } from "../Redux/Actions/UserAction";
 
 const useStyle = makeStyles({
   heading: {
@@ -84,7 +82,7 @@ const Signup = () => {
   const { email, name, password, confirmPassword } = user;
 
   const addData = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(user);
     if (email && name && password && confirmPassword) {
       dispatch(signUp(name, email, password, confirmPassword));
