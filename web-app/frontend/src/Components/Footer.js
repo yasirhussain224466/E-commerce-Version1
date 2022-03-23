@@ -1,19 +1,10 @@
 import React from "react";
-import { Grid, Typography, Box } from "@mui/material";
-import {
-  Button,
-  Divider,
-  Container,
-  List,
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import AppStore from "../Assets/PNG Image/AppStore.png";
 import PlayStore from "../Assets/PNG Image/playStore.png";
 import { makeStyles } from "@mui/styles";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   footer: {
@@ -43,7 +34,7 @@ const useStyles = makeStyles({
   midFooter: {
     display: "flex",
     flexDirection: "column",
-    paddingTop:'0px',
+    paddingTop: "0px",
     paddingBottom: "50px",
   },
 });
@@ -71,9 +62,18 @@ const Hello = () => {
         </Grid>
 
         <Grid xs={12} sm={12} md={4} item className={classes.midFooter}>
-          <Typography variant="h3">QuickMart</Typography>
+          <NavLink
+            style={{
+              color: "white",
+              textDecoration: "none",
+              fontFamily: "Roboto",
+            }}
+            to="/"
+          >
+            <Typography variant="h3">Technofony</Typography>
+          </NavLink>
           <br />
-          
+
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
@@ -92,28 +92,39 @@ const Hello = () => {
         <Grid xs={12} sm={12} md={4} item className={classes.rightFooter}>
           <Typography variant="h4">Follow Us</Typography>
           <br />
-          
+
           <Box sx={{ textDecoration: "none" }}>
-            <Button><FacebookTwoToneIcon/></Button>
-            <Button><FacebookTwoToneIcon/></Button>
-            <Button><FacebookTwoToneIcon/></Button>
-            <Button><FacebookTwoToneIcon/></Button>
+            <Button>
+              <FacebookTwoToneIcon />
+            </Button>
+            <Button>
+              <FacebookTwoToneIcon />
+            </Button>
+            <Button>
+              <FacebookTwoToneIcon />
+            </Button>
+            <Button>
+              <FacebookTwoToneIcon />
+            </Button>
           </Box>
         </Grid>
         <Grid>
-        <Box
-          sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column" }}
-        >
-          <Typography variant="p">
-            High quality is our first priority{" "}
-          </Typography>
-          <Typography  variant="p">
-            Copyright 2022 &copy; M.Yasir.Hussain
-          </Typography>
-        </Box>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              flexDirection: "column",
+            }}
+          >
+            <Typography variant="p">
+              High quality is our first priority{" "}
+            </Typography>
+            <Typography variant="p">
+              Copyright 2022 &copy; M.Yasir.Hussain
+            </Typography>
+          </Box>
+        </Grid>
       </Grid>
-      </Grid>
-      
+
       {/* </Container> */}
     </>
   );

@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 import Product from "./ProductCard";
 import { getProduct } from "../Redux/Actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import Loader from "./Loader";
 const useStyles = makeStyles({
   FeaturedProduct: {
     paddingTop: "20px",
@@ -35,47 +37,51 @@ const FeaturedProduct = () => {
   const classes = useStyles();
   return (
     <>
-      <Box sx={{ backgroundColor: "#f4f4f4" }}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Box>
-            {" "}
-            <Grid className={classes.FeaturedProduct}>
-              <Typography
-                sx={{
-                  fontSize: { md: "26px", xs: "25px" },
-                }}
-                className={classes.ProductHead}
-                variant="h5"
-              >
-                Featured Product
-              </Typography>
-            </Grid>
-          </Box>
-        </Box>
-        <Container maxWidth="xl">
-          <Grid
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box sx={{ backgroundColor: "#f4f4f4" }}>
+          <Box
             sx={{
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
+            <Box>
+              {" "}
+              <Grid className={classes.FeaturedProduct}>
+                <Typography
+                  sx={{
+                    fontSize: { md: "26px", xs: "25px" },
+                  }}
+                  className={classes.ProductHead}
+                  variant="h5"
+                >
+                  Featured Product
+                </Typography>
+              </Grid>
+            </Box>
+          </Box>
+          <Container maxWidth="xl">
             <Grid
-              container
-              sx={{ display: "flex", justifyContent: "space-around" }}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              {products &&
-                products.map((currElem) => <Product product={currElem} />)}
+              <Grid
+                container
+                sx={{ display: "flex", justifyContent: "space-around" }}
+              >
+                {products &&
+                  products.map((currElem) => <Product product={currElem} />)}
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
+      )}
     </>
   );
 };

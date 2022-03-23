@@ -53,6 +53,9 @@ const Product = new mongoose.Schema({
     maxlength: [4, "stock cannot exceeds 4 character"],
     default: 1,
   },
+  discount: {
+    type: Number,
+  },
   reviews: [
     {
       name: {

@@ -11,6 +11,8 @@ import { Box, Avatar, Link } from "@mui/material";
 import LinearIndeterminate from "./Loader";
 // import {Link} from 'react-router-dom'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp, clearError } from "../Redux/Actions/UserAction";
 
 const useStyle = makeStyles({
   heading: {
@@ -50,7 +52,7 @@ const useStyle = makeStyles({
     backgroundColor: "#15396A",
   },
   inputfeild: {
-    padding: "20px 35px 20px 20px",
+    padding: "0px 0px 0px 0px",
     borderRadius: "15px",
     display: "flex",
     flexDirection: "column",
@@ -70,7 +72,9 @@ const initialValue = {
   confirmPassword: "",
 };
 
-const Signup = ({ handleClose }) => {
+const Signup = () => {
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState(initialValue);
   const OnChangeUser = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -79,12 +83,29 @@ const Signup = ({ handleClose }) => {
 
   const { email, name, password, confirmPassword } = user;
 
+  const addData = (e) => {
+    e.preventDefault()
+    console.log(user);
+    if (email && name && password && confirmPassword) {
+      dispatch(signUp(name, email, password, confirmPassword));
+    } else {
+      console.log("invalid Data");
+    }
+  };
+
   return (
     <>
       {" "}
-      
       <Box className={classes.inputfeild}>
-        <Avatar sx={{ mb: 3, bgcolor: "#15396A" }}>
+        <Avatar
+          sx={{
+            height: "50px",
+            width: "50px",
+            mt: 1,
+            mb: 0,
+            bgcolor: "#15396A",
+          }}
+        >
           <LockOutlinedIcon />
         </Avatar>
         <Grid container form spacing={4}>
@@ -93,8 +114,8 @@ const Signup = ({ handleClose }) => {
             <TextField
               required
               className={classes.field}
-              id="FullName"
-              name="FullName"
+              id="name"
+              name="name"
               value={name}
               label="Full Name"
               fullWidth
@@ -107,9 +128,9 @@ const Signup = ({ handleClose }) => {
             <TextField
               className={classes.field}
               required
-              id="Email"
+              id="email"
               value={email}
-              name="Email"
+              name="email"
               label="Email"
               fullWidth
               autoComplete="given-name"
@@ -121,6 +142,7 @@ const Signup = ({ handleClose }) => {
           <Grid item md={12} xs={12} sm={12}>
             <TextField
               className={classes.field}
+              type="password"
               id="password"
               name="password"
               value={password}
@@ -134,6 +156,7 @@ const Signup = ({ handleClose }) => {
 
           <Grid item md={12} xs={12} sm={12}>
             <TextField
+              type="password"
               className={classes.field}
               id="confirmPassword"
               value={confirmPassword}
@@ -155,7 +178,7 @@ const Signup = ({ handleClose }) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => {}}
+              onClick={addData}
               disabled={false}
             >
               {" "}

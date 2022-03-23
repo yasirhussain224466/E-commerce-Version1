@@ -2,12 +2,15 @@ const express = require('express')
 const app = express()
 const cookieParcer = require('cookie-parser')
 const morgan = require("morgan");
+const cors = require('cors');
 const product = require('./Routes/ProductRoute')
 const UserAuthentication = require('./Routes/AuthenticationRoute')
 const GlobalErrorHandler = require('./Controller/ErrorController')
 const AppError = require('./Utils/ErrorHandler')
+const bodyParcer = require("body-parser")
+const fileUpload = require("express-fileupload")
 
-
+app.use(cors())
 app.use(express.json());
 app.use(cookieParcer())
 app.use(morgan("dev"));

@@ -18,7 +18,7 @@ import SwipeableTemporaryDrawer from "./AppDrawer";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link, NavLink } from "react-router-dom";
-import LoginSignup from "./LoginSignup";
+import LoginSignup from "./registerUser";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -202,18 +202,22 @@ export default function PrimarySearchAppBar() {
                 </Badge>
               </IconButton>
 
-              {/* <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton> */}
-              <LoginSignup/>
+              <Link style={{color:'white'}} to="/loginsignup">
+                {" "}
+                <IconButton
+                  size="large"
+                  edge="end"
+                  // aria-label="account of current user"
+                  // aria-controls={menuId}
+                  // aria-haspopup="true"
+                  // onClick={handleProfileMenuOpen}
+                  // color="white"
+                  backgroundColor="white" color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
+              {/* <LoginSignup/> */}
             </Box>
           </Toolbar>
         </AppBar>
@@ -223,19 +227,18 @@ export default function PrimarySearchAppBar() {
       <Box
         position="sticky"
         top={0}
-        
         sx={{
           backgroundColor: "#15396A",
-          zIndex:1,
+          zIndex: 1,
           margin: "0px",
           padding: "9px",
-          overflowY: 'auto',
+          overflowY: "auto",
           // height:'40px',
           // position: '-webkit-sticky',
           display: { md: "none", lg: "none", xs: "block", sm: "none" },
         }}
       >
-        <Search >
+        <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>

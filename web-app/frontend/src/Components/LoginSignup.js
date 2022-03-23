@@ -7,7 +7,9 @@ import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import Signup from "./Signup";
 import Login from "./Login";
+import { useDispatch, useSelector } from "react-redux";
 import LinearIndeterminate from "./Loader";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,6 +45,8 @@ function a11yProps(index) {
 }
 
 const LoginSignup = () => {
+  const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,73 +60,72 @@ const LoginSignup = () => {
 
   return (
     <>
-      <IconButton color="inherit" edge="end" onClick={handleShow}>
-        <AccountCircle />
-      </IconButton>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        style={{ padding: "0px", color: "f5f5f5" }}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-          {/* <LinearIndeterminate /> */}
-
+      {loading ? (
+        <LinearIndeterminate />
+      ) : (
         <Box
           sx={{
-            padding: "0px",
-            marginLeft: "8px",
-            marginTop: "7px",
-            marginBottom: "7px",
-
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             width: "100%",
-            borderLeft: "3px solid #15396A",
+            height: { md: "90vh", lg: "90vh", sm: "82vh", xs: "85vh" },
           }}
         >
           <Box
             sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-              color: "#15396A",
-              margin: "0px",
               padding: "0px",
+              height: "100%",
+              width: { md: "35%", lg: "30%", sm: "90%", xs: "100%" },
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-              centered
-              textColor="inherit"
+            <Box
+              sx={{
+                borderColor: "divider",
+                color: "#15396A",
+                margin: "0px",
+                padding: "0px",
+              }}
             >
-              <Tab label="Login" {...a11yProps(0)} />
-              <Tab label="Signup" {...a11yProps(1)} />
-            </Tabs>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                centered
+                textColor="inherit"
+              >
+                <Tab label="Login" {...a11yProps(0)} />
+                <Tab label="Signup" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <SwipeableViews
+              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={value}
+              onChangeIndex={handleChange}
+              sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
+            >
+              <TabPanel
+                sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
+                value={value}
+                index={0}
+              >
+                <Login />
+              </TabPanel>
+              <TabPanel
+                sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
+                value={value}
+                index={1}
+              >
+                <Signup />
+              </TabPanel>
+            </SwipeableViews>
           </Box>
-          <SwipeableViews
-            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            index={value}
-            onChangeIndex={handleChange}
-            sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
-          >
-            <TabPanel
-              sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
-              value={value}
-              index={0}
-            >
-              <Login handleClose={handleClose} />
-            </TabPanel>
-            <TabPanel
-              sx={{ color: "#15396A", margin: "0px", padding: "0px" }}
-              value={value}
-              index={1}
-            >
-              <Signup handleClose={handleClose} />
-            </TabPanel>
-          </SwipeableViews>
         </Box>
-      </Modal>
+      )}
     </>
   );
 };

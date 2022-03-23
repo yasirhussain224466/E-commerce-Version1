@@ -10,6 +10,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Avatar, Link } from "@mui/material";
 // import {Link} from 'react-router-dom'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { clearError, login } from "../Redux/Actions/UserAction";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import SmsFailedRoundedIcon from "@mui/icons-material/SmsFailedRounded";
+import Loader from "./Loader";
 
 const useStyle = makeStyles({
   heading: {
@@ -49,7 +54,7 @@ const useStyle = makeStyles({
     backgroundColor: "#15396A",
   },
   inputfeild: {
-    padding: "20px 35px 20px 20px",
+    padding: "0px 0px 0px 0px",
     borderRadius: "15px",
     display: "flex",
     flexDirection: "column",
@@ -63,52 +68,71 @@ const useStyle = makeStyles({
   },
 });
 const initialValue = {
-  Email: "",
-  FullName: "",
+  email: "",
   password: "",
-  confirmPassword: "",
-  Country: "",
-  Gender: "",
-  MureedTalib: "",
-  Sheikh: "",
-  Message: "",
 };
 
 const Login = () => {
-  const [user, setUser] = useState(initialValue);
+  const dispatch = useDispatch();
+  const [loginUser, setLoginUser] = useState(initialValue);
+  const [check, setCheck] = useState();
+  const { user, loading, isAuthenticated } = useDispatch((state) => state.user);
   const OnChangeUser = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
   const classes = useStyle();
 
-  const {
-    Email,
-    FullName,
-    password,
-    confirmPassword,
-    Country,
-    Gender,
-    MureedTalib,
-    Sheikh,
-    Message,
-  } = user;
+  const { email, password } = loginUser;
+
+  const addData = (e) => {
+    setCheck(true);
+    if (email && password) {
+      e.preventDefault();
+      dispatch(login(email, password));
+
+      setLoginUser({
+        email: "",
+        password: "",
+      });
+    } else {
+      console.log("Provide valid");
+      setCheck(false);
+    }
+  };
 
   return (
     <>
-      <Box className={classes.inputfeild}>
-        <Avatar sx={{ mb: 11, bgcolor: "#15396A" }}>
-          <LockOutlinedIcon />
+      <Box sx={{ p: 0, mb: 13 }} className={classes.inputfeild}>
+        <Avatar
+          sx={{
+            height: "50px",
+            width: "50px",
+            mt: 8,
+            mb: 7,
+            bgcolor: "#15396A",
+          }}
+        >
+          {isAuthenticated ? (
+            isAuthenticated ? (
+              <TaskAltIcon />
+            ) : (
+              <SmsFailedRoundedIcon />
+            )
+          ) : (
+            <LockOutlinedIcon />
+          )}
         </Avatar>
-        <Grid container form spacing={4}>
+        <Grid container form spacing={3}>
           <CssBaseline />
-          
+
           <Grid item xs={12} sm={12}>
             <TextField
-              className={classes.field}
               required
-              id="Email"
-              value={Email}
-              name="Email"
+              className={classes.field}
+              id="email"
+              value={email}
+              name="email"
+              type="email"
               label="Email"
               fullWidth
               autoComplete="given-name"
@@ -121,6 +145,7 @@ const Login = () => {
             <TextField
               className={classes.field}
               id="password"
+              type="password"
               name="password"
               value={password}
               label="Password"
@@ -131,14 +156,12 @@ const Login = () => {
             />
           </Grid>
           <Grid mb={0} container justifyContent="flex-end">
-              <Grid item>
-                <Link color="#15396A" href="#" variant="body2">
-                  forgot password
-                </Link>
-              </Grid>
+            <Grid item>
+              <Link color="#15396A" href="#" variant="body2">
+                forgot password
+              </Link>
             </Grid>
-
-         
+          </Grid>
 
           <Grid item xs={12} md={12}>
             <Button
@@ -149,20 +172,18 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 2 }}
+              onClick={(e) => addData(e)}
             >
               {" "}
               Login
             </Button>
-            <Grid mb={16} container justifyContent="flex-end">
+            <Grid mb={0} container justifyContent="flex-end">
               <Grid item>
-                <Link color="#15396A" href="#" variant="body2">
-                  
-                </Link>
+                <Link color="#15396A" href="#" variant="body2"></Link>
               </Grid>
             </Grid>
           </Grid>
-          
         </Grid>
       </Box>
     </>
